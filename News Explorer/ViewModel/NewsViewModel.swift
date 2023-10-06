@@ -10,43 +10,47 @@ import Combine
 
 class NewsViewModel: ObservableObject {
     private let apiKey = "909f45884df343808e52a746f428214e"
+    private let dateFormat = "yyyy-MM-dd"
     private let formatter = DateFormatter()
+    private var url: URL? {
+        URL(string: "https://newsapi.org/v2/everything?q=\(query)&from=\(formatter.string(from: fromDate))&to=\(formatter.string(from: toDate))&apiKey=\(apiKey)")
+    }
+    private var templateURL: URL? {
+        URL(string: "https://newsapi.org/v2/everything?q=apple&apiKey=\(apiKey)")
+    }
+    
     @Published var articles: [Article] = [ArticleView_Previews.sampleArticle]
     
-    @Published var query = "apple"
+    @Published var query = ""
     @Published var fromDate = Date()
     @Published var toDate = Date()
     
     init() {
-        formatter.dateFormat = "yyyy-MM-dd"
-        
+        formatter.dateFormat = dateFormat
+        fetchTemplateNews(url: templateURL)
     }
     
     func fetchNews() {
-        print("Query: \(query)")
-        print("FromDate: \(formatter.string(from: fromDate))")
-        print("ToDate: \(formatter.string(from: toDate))")
-        guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(query)&from=\(formatter.string(from: fromDate))&to=\(formatter.string(from: toDate))&apiKey=\(apiKey)") else {
-            return
-        }
+        fetchTemplateNews(url: url)
+    }
+    
+    private func fetchTemplateNews(url: URL?) {
+        guard let url else { return }
 
-        print(url)
         URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let data = data {
+            if let data {
                 do {
-                    var articles = try JSONDecoder().decode(ArticleResponce.self, from: data)
+                    let articles = try JSONDecoder().decode(ArticleResponce.self, from: data)
                     DispatchQueue.main.async {
-                        print(articles.status)
-                        articles.articles = articles.articles.map({Article(from: $0)})
-                        self.articles = articles.articles
+                        let articlisWithID = articles.articles.map({Article(from: $0)})
+                        self.articles = articlisWithID
                     }
                 } catch {
                     print("Error decoding JSON: \(error)")
                 }
-            } else if let error = error {
+            } else if let error {
                 print("Networking error: \(error)")
             }
         }.resume()
     }
 }
-

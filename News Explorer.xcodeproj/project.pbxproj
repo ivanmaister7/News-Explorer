@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF44B5C72AD032230096CFF5 /* ArticleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44B5C62AD032230096CFF5 /* ArticleRowView.swift */; };
 		AF79F49D2ACFF17B00E9A4B2 /* News_ExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF79F49C2ACFF17B00E9A4B2 /* News_ExplorerApp.swift */; };
 		AF79F49F2ACFF17B00E9A4B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF79F49E2ACFF17B00E9A4B2 /* ContentView.swift */; };
 		AF79F4A12ACFF17F00E9A4B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF79F4A02ACFF17F00E9A4B2 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF44B5C62AD032230096CFF5 /* ArticleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRowView.swift; sourceTree = "<group>"; };
 		AF79F4992ACFF17B00E9A4B2 /* News Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News Explorer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF79F49C2ACFF17B00E9A4B2 /* News_ExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News_ExplorerApp.swift; sourceTree = "<group>"; };
 		AF79F49E2ACFF17B00E9A4B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				AF79F4AD2ACFFC0700E9A4B2 /* NewsView.swift */,
 				AF79F4B32ACFFD1600E9A4B2 /* ArticleView.swift */,
+				AF44B5C62AD032230096CFF5 /* ArticleRowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF79F4B02ACFFCCE00E9A4B2 /* Article.swift in Sources */,
+				AF44B5C72AD032230096CFF5 /* ArticleRowView.swift in Sources */,
 				AF79F4B42ACFFD1600E9A4B2 /* ArticleView.swift in Sources */,
 				AF79F4AE2ACFFC0700E9A4B2 /* NewsView.swift in Sources */,
 				AF79F49F2ACFF17B00E9A4B2 /* ContentView.swift in Sources */,

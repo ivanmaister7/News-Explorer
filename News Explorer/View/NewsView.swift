@@ -14,24 +14,34 @@ struct NewsView: View {
         NavigationView {
             VStack {
                 NavigationStack {
-                    DatePicker("From Date", selection: $viewModel.fromDate, in: ...Date(), displayedComponents: .date)
-                    DatePicker("To Date", selection: $viewModel.toDate, in: ...Date(), displayedComponents: .date)
-                    
-                    Button(action: { fetchNews() }) {
-                        Text("Search")
+                    List {
+                        ForEach(viewModel.articles) { article in
+                            NavigationLink(destination: ArticleView(article: article)) {
+                                ArticleRowView(article: article)
+                            }
+                        }
                     }
                 }
                 .searchable(text: $viewModel.query, prompt: "Searching for ...")
-                List {
-                    ForEach(viewModel.articles) { article in
-                        NavigationLink(destination: ArticleView(article: article)) {
-                            ArticleView(article: article)
+                .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        
+                        HStack {
+                            DatePicker("", selection: $viewModel.fromDate, in: ...Date(), displayedComponents: .date)
+                            
+                            Text(" - ")
+                            
+                            DatePicker("", selection: $viewModel.toDate, in: ...Date(), displayedComponents: .date)
+                            
+                            Spacer()
+                            
+                            Button(action: { fetchNews() }) {
+                                Image(systemName: "magnifyingglass.circle")
+                            }
                         }
                     }
-                    .navigationBarTitle("News")
                 }
             }
-            .onAppear { fetchNews() }
         }
     }
     
