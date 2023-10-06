@@ -27,6 +27,11 @@ struct NewsView: View {
                     ToolbarItem(placement: .navigation) {
                         
                         HStack {
+                            Menu("Sort") {
+                                Button("Relevancy", action: { fetchSortNews(sortBy: .relevancy) })
+                                Button("Popularity", action: { fetchSortNews(sortBy: .popularity) })
+                                Button("PublishedAt", action: { fetchSortNews(sortBy: .publishedAt) })
+                            }
                             DatePicker("", selection: $viewModel.fromDate, in: ...Date(), displayedComponents: .date)
                             
                             Text(" - ")
@@ -47,6 +52,11 @@ struct NewsView: View {
     
     func fetchNews() {
         viewModel.fetchNews()
+    }
+    
+    func fetchSortNews(sortBy: SortType) {
+        viewModel.sortBy = sortBy
+        fetchNews()
     }
 }
 

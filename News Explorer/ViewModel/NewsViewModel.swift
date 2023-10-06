@@ -8,12 +8,16 @@
 import Foundation
 import Combine
 
+enum SortType {
+    case relevancy, popularity, publishedAt
+}
+
 class NewsViewModel: ObservableObject {
     private let apiKey = "909f45884df343808e52a746f428214e"
     private let dateFormat = "yyyy-MM-dd"
     private let formatter = DateFormatter()
     private var url: URL? {
-        URL(string: "https://newsapi.org/v2/everything?q=\(query)&from=\(formatter.string(from: fromDate))&to=\(formatter.string(from: toDate))&apiKey=\(apiKey)")
+        URL(string: "https://newsapi.org/v2/everything?q=\(query)&from=\(formatter.string(from: fromDate))&to=\(formatter.string(from: toDate))&sortBy=\(sortBy)&apiKey=\(apiKey)")
     }
     private var templateURL: URL? {
         URL(string: "https://newsapi.org/v2/everything?q=apple&apiKey=\(apiKey)")
@@ -24,6 +28,7 @@ class NewsViewModel: ObservableObject {
     @Published var query = ""
     @Published var fromDate = Date()
     @Published var toDate = Date()
+    @Published var sortBy: SortType = .publishedAt
     
     init() {
         formatter.dateFormat = dateFormat

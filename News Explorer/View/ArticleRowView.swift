@@ -16,7 +16,7 @@ struct ArticleRowView: View {
                 .font(.title)
                 .fontWeight(.bold)
             
-            Text(article.description ?? "ddd")
+            Text(article.description ?? "-")
                 .font(.body)
         }
     }
